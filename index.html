@@ -84,6 +84,65 @@
 
         <div class="ml-auto flex items-center gap-3">
 
+           <!-- parte  do usuario e dropdown -->
+          <div class="relative">
+            <button id="userBtn" aria-haspopup="true" aria-expanded="false"
+              class="flex items-center gap-2 rounded-lg p-1 transition hover:bg-icy/40 focus:outline-none focus:ring-2 focus:ring-icy active:scale-95 dark:hover:bg-iron">
+              <span class="flex h-9 w-9 items-center justify-center rounded-full bg-iron text-sm font-semibold text-white dark:bg-icy dark:text-ink">DT</span>
+              <span class="hidden text-left text-sm leading-tight md:block">
+                <span class="block font-medium">Davi Toyota</span>
+                <span class="block text-xs opacity-70">Desenvolvedor</span>
+              </span>
+            </button>
+
+            <div id="userMenu"
+              class="absolute right-0 mt-2 hidden w-48 flex-col rounded-lg border border-icy bg-white py-1 text-sm shadow-lg dark:border-iron dark:bg-iron">
+              <a href="#" class="px-4 py-2 transition hover:bg-icy/40 dark:hover:bg-ink">Meu perfil</a>
+              <a href="#" class="px-4 py-2 transition hover:bg-icy/40 dark:hover:bg-ink">Configurações</a>
+              <a href="#" class="px-4 py-2 transition hover:bg-icy/40 dark:hover:bg-ink">Sair</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- buscar projeto e novo prjeto  -->
+      <main class="flex flex-1 flex-col gap-6 p-4 sm:p-6">
+
+        <!-- Pesquisa + ações -->
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <input id="search" type="search" placeholder="Pesquisar projetos..."
+            class="w-full rounded-lg border border-icy bg-white px-4 py-2 text-sm transition focus:border-iron focus:outline-none focus:ring-2 focus:ring-icy dark:border-iron dark:bg-ink dark:focus:border-icy sm:max-w-sm" />
+
+          <div class="flex flex-wrap gap-2">
+            
+            <button id="newProjectBtn"
+              class="open-modal rounded-lg bg-iron px-4 py-2 text-sm font-medium text-white transition duration-200 hover:bg-ink focus:outline-none focus:ring-2 focus:ring-icy active:scale-95 dark:bg-icy dark:text-ink dark:hover:bg-white">
+              + Novo projeto
+            </button>
+          </div>
+        </div>
+
+        <!-- cards -->
+        <section class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div class="rounded-xl border border-icy bg-white p-5 transition duration-200 hover:-translate-y-1 dark:border-iron dark:bg-iron/40">
+            <p class="text-sm opacity-70">Projetos ativos</p>
+            <p class="mt-1 text-3xl font-bold">0</p>
+          </div>
+          <div class="rounded-xl border border-icy bg-white p-5 transition duration-200 hover:-translate-y-1 dark:border-iron dark:bg-iron/40">
+            <p class="text-sm opacity-70">Projetos concluídos</p>
+            <p class="mt-1 text-3xl font-bold">0</p>
+          </div>
+          <div class="rounded-xl border border-icy bg-white p-5 transition duration-200 hover:-translate-y-1 dark:border-iron dark:bg-iron/40">
+            <p class="text-sm opacity-70">Tarefas pendentes</p>
+            <p class="mt-1 text-3xl font-bold">0</p>
+          </div>
+          <div class="rounded-xl border border-icy bg-white p-5 transition duration-200 hover:-translate-y-1 dark:border-iron dark:bg-iron/40">
+            <p class="text-sm opacity-70">Equipes</p>
+            <p class="mt-1 text-3xl font-bold">0</p>
+          </div>
+        </section>
+
+
          
   </div>
 
