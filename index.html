@@ -142,7 +142,109 @@
           </div>
         </section>
 
+  <!-- area de onde ficaria os projetos -->
+        <section id="projetos" class="flex flex-1 flex-col gap-4">
+          <h2 class="text-lg font-semibold">Projetos</h2>
 
+          <div class="flex flex-1 flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-icy p-8 text-center dark:border-iron">
+            <h3 class="text-xl font-semibold">Você ainda não tem projetos</h3>
+            <p class="max-w-md text-sm opacity-70">Que tal começar agora? Crie seu primeiro projeto para acompanhar prazos, equipes e tarefas em um só lugar.</p>
+            <button id="emptyNewBtn"
+              class="open-modal mt-2 rounded-lg bg-iron px-5 py-2 text-sm font-medium text-white transition duration-200 hover:bg-ink focus:outline-none focus:ring-2 focus:ring-icy active:scale-95 dark:bg-icy dark:text-ink dark:hover:bg-white">
+              Criar meu primeiro projeto
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- formulario para adicionar um novo projeto -->
+  <div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4">
+    <div class="max-h-full w-full max-w-lg overflow-y-auto rounded-xl bg-white p-6 dark:bg-iron">
+      <div class="mb-4 flex items-center justify-between">
+        <h2 class="text-lg font-semibold">Novo projeto</h2>
+        <button id="closeModal" aria-label="Fechar"
+          class="rounded-lg p-1 transition hover:bg-icy/40 focus:outline-none focus:ring-2 focus:ring-icy active:scale-95 dark:hover:bg-ink">✕</button>
+      </div>
+
+      <form id="projectForm" novalidate class="flex flex-col gap-4">
+
+        <div class="flex flex-col gap-1">
+          <label for="nome" class="text-sm font-medium">Nome</label>
+          <input id="nome" type="text" placeholder="Ex.: App Mobile"
+            class="field rounded-lg border border-icy bg-white px-3 py-2 text-sm transition focus:outline-none focus:ring-2 focus:ring-icy dark:border-ink dark:bg-ink" />
+          <small class="msg hidden text-xs"></small>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label for="responsavel" class="text-sm font-medium">Responsável</label>
+          <input id="responsavel" type="text" placeholder="Nome do responsável"
+            class="field rounded-lg border border-icy bg-white px-3 py-2 text-sm transition focus:outline-none focus:ring-2 focus:ring-icy dark:border-ink dark:bg-ink" />
+          <small class="msg hidden text-xs"></small>
+
+        </div>
+        <!-- Categorias do projeto  -->
+
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div class="flex flex-col gap-1">
+            <label for="categoria" class="text-sm font-medium">Categoria</label>
+            <select id="categoria"
+              class="field rounded-lg border border-icy bg-white px-3 py-2 text-sm transition focus:outline-none focus:ring-2 focus:ring-icy dark:border-ink dark:bg-ink">
+              <option value="">Selecione</option>
+              <option>Desenvolvimento</option>
+              <option>Design</option>
+              <option>Infraestrutura</option>
+              <option>Dados</option>
+            </select>
+            <small class="msg hidden text-xs"></small>
+          </div>
+ 
+          <!-- prioridade do projeto  -->
+          <div class="flex flex-col gap-1">
+            <label for="prioridade" class="text-sm font-medium">Prioridade</label>
+            <select id="prioridade"
+              class="field rounded-lg border border-icy bg-white px-3 py-2 text-sm transition focus:outline-none focus:ring-2 focus:ring-icy dark:border-ink dark:bg-ink">
+              <option value="">Selecione</option>
+              <option>Baixa</option>
+              <option>Média</option>
+              <option>Alta</option>
+            </select>
+            <small class="msg hidden text-xs"></small>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label for="prazo" class="text-sm font-medium">Prazo</label>
+          <input id="prazo" type="date"
+            class="field rounded-lg border border-icy bg-white px-3 py-2 text-sm transition focus:outline-none focus:ring-2 focus:ring-icy dark:border-ink dark:bg-ink dark:[color-scheme:dark]" />
+          <small class="msg hidden text-xs"></small>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label for="descricao" class="text-sm font-medium">Descrição</label>
+          <textarea id="descricao" rows="3" placeholder="Descreva o projeto (mín. 10 caracteres)"
+            class="field rounded-lg border border-icy bg-white px-3 py-2 text-sm transition focus:outline-none focus:ring-2 focus:ring-icy dark:border-ink dark:bg-ink"></textarea>
+          <small class="msg hidden text-xs"></small>
+        </div>
+        <!-- envio ficticio e uma mensagemd de validacao , falando que o projeto foi validado com suceso  -->
+
+        <p id="formSuccess" class="hidden rounded-lg bg-green-500/20 px-3 py-2 text-sm text-green-700 dark:text-green-400">
+          Projeto validado com sucesso!
+        </p>
+
+        <div class="flex flex-wrap justify-end gap-2">
+          <button type="button" id="cancelModal"
+            class="rounded-lg border border-icy px-4 py-2 text-sm transition hover:bg-icy/40 focus:outline-none focus:ring-2 focus:ring-icy active:scale-95 dark:border-ink dark:hover:bg-ink">
+            Cancelar
+          </button>
+          <button type="submit" id="submitBtn"
+            class="rounded-lg bg-iron px-4 py-2 text-sm font-medium text-white transition hover:bg-ink focus:outline-none focus:ring-2 focus:ring-icy active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-icy dark:text-ink dark:hover:bg-white">
+            Salvar projeto
+          </button>
+        </div>
+      </form>
+    </div>
          
   </div>
 
