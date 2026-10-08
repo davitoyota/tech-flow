@@ -2,65 +2,91 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>techflow</title>
-  <link rel="stylesheet" href="/css/styles.css" />
-</head>
-<body class="bg-[#0c0c0e] text-white antialiased min-h-screen flex flex-col">
+  <title>TechFlow – Dashboard</title>
 
-  <!-- Navbar -->
-  <header class="h-16 border-b border-zinc-800 bg-[#121212] text-zinc-400 px-4 md:px-8 flex items-center justify-between w-full"> 
-    
-    <!-- Menu hamburguer que aparece apenas no mobile -->
-    <div class="flex items-center"> 
-      <button id="toggle-sidebar" class="lg:hidden p-2 rounded-lg text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors flex items-center justify-center">
-        <svg xmlns="http://w3.org" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-    </div>
-      
-    <!-- Busca e Perfil do usuario -->
-    <div class="flex items-center gap-6">
-      
-      <!-- Campo de busca -->
-      <div class="relative w-40 sm:w-60">
-        <svg xmlns="http://w3.org" class="h-4 w-4 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-        <input type="text" placeholder="Pesquisar projetos..." class="w-full bg-[#18181b] border border-zinc-800 rounded-lg pl-9 pr-4 py-1.5 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-amber-500 transition-colors">
+
+  <script>
+    (function () {
+      var t = localStorage.getItem('theme') || 'system';
+      var dark = t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.classList.toggle('dark', dark);
+    })();
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            icy: '#A9CEF4',
+            iron: '#36494E', 
+            ink: '#000000'  
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body class="bg-icy/20 text-ink dark:bg-ink dark:text-white transition-colors duration-300">
+  <div class="flex min-h-screen lg:h-screen lg:overflow-hidden">
+
+    <!-- Overlay do menu mobile -->
+    <div id="overlay" class="fixed inset-0 z-30 hidden bg-black/50 lg:hidden"></div>
+
+    <!-- side bar -->
+    <aside id="sidebar"
+      class="fixed inset-y-0 left-0 z-40 flex w-64 -translate-x-full flex-col gap-6 border-r border-icy bg-white p-5 transition-transform duration-300 ease-in-out dark:border-iron dark:bg-ink lg:static lg:translate-x-0">
+
+      <div class="flex items-center justify-between">
+        <span class="text-xl font-bold text-iron dark:text-icy">TechFlow</span>
+        <button id="closeSidebar" aria-label="Fechar menu"
+          class="rounded-lg p-1 transition hover:bg-icy/40 focus:outline-none focus:ring-2 focus:ring-icy active:scale-95 dark:hover:bg-iron lg:hidden">
+          ✕
+        </button>
       </div>
 
-      <!-- Status -->
-      <div class="w-5 h-5 rounded-full bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.4)] cursor-pointer hover:scale-105 transition-transform"></div>
+      <nav class="flex flex-col gap-1 text-sm font-medium">
+        <a href="#" class="rounded-lg bg-icy px-3 py-2 text-ink transition">Dashboard</a>
+        <a href="#" class="rounded-lg px-3 py-2 transition hover:bg-icy/40 focus:outline-none focus:ring-2 focus:ring-icy dark:hover:bg-iron">Projetos</a>
+        <a href="#" class="rounded-lg px-3 py-2 transition hover:bg-icy/40 focus:outline-none focus:ring-2 focus:ring-icy dark:hover:bg-iron">Equipes</a>
+        <a href="#" class="rounded-lg px-3 py-2 transition hover:bg-icy/40 focus:outline-none focus:ring-2 focus:ring-icy dark:hover:bg-iron">Tarefas</a>
+        <a href="#" class="rounded-lg px-3 py-2 transition hover:bg-icy/40 focus:outline-none focus:ring-2 focus:ring-icy dark:hover:bg-iron">Configurações</a>
+      </nav>
 
-
-      <!-- Dropdown Usuario -->
-      <div class="relative">
-        <button id="user-dropdown-btn" class="flex items-center gap-3 p-1 rounded-xl hover:bg-zinc-800/50 transition-all text-left group">
-          <div class="hidden md:block">
-            <p class="text-xs font-semibold text-zinc-200 group-hover:text-white transition-colors">Davi Toyota</p>
-            <p class="text-[10px] text-zinc-500">Product Designer</p>
-          </div>
-          <svg xmlns="http://w3.org" class="h-3 w-3 text-zinc-500 group-hover:text-zinc-300 transition-colors pt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-
-        <!-- Menu suspenso -->
-        <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-[#121214] border border-zinc-800 rounded-xl shadow-2xl py-1 z-50">
-          <a href="#" class="block px-4 py-2.5 text-xs text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors">Meu Perfil</a>
-          <a href="#" class="block px-4 py-2.5 text-xs text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors">Configurações</a>
-          <hr class="border-zinc-800 my-1">
-          <a href="#" class="block px-4 py-2.5 text-xs text-red-400 hover:bg-red-950/20 transition-colors">Sair da Conta</a>
+      <!-- Seletor de tema -->
+      <div class="mt-auto flex flex-col gap-2">
+        <span class="text-xs opacity-70">Tema</span>
+        <div class="flex rounded-lg border border-icy p-0.5 text-xs dark:border-iron" role="group" aria-label="Tema">
+          <button data-theme="light" class="theme-btn flex-1 rounded-md px-2 py-1 transition focus:outline-none focus:ring-2 focus:ring-icy aria-pressed:bg-iron aria-pressed:text-white dark:aria-pressed:bg-icy dark:aria-pressed:text-ink">Light</button>
+          <button data-theme="dark" class="theme-btn flex-1 rounded-md px-2 py-1 transition focus:outline-none focus:ring-2 focus:ring-icy aria-pressed:bg-iron aria-pressed:text-white dark:aria-pressed:bg-icy dark:aria-pressed:text-ink">Dark</button>
+          <button data-theme="system" class="theme-btn flex-1 rounded-md px-2 py-1 transition focus:outline-none focus:ring-2 focus:ring-icy aria-pressed:bg-iron aria-pressed:text-white dark:aria-pressed:bg-icy dark:aria-pressed:text-ink">System</button>
         </div>
       </div>
+    </aside>
 
-    </div>
-  </header>
 
-  <!-- Script local carregado nativamente pelo Vite -->
-  <script type="module" src="/js/app.js"></script>
+    <div class="flex min-w-0 flex-1 flex-col lg:overflow-hidden">
+
+      <!-- nav bar -->
+      <header
+        class="sticky top-0 z-20 flex items-center justify-between gap-3 border-b border-icy bg-white px-4 py-3 dark:border-iron dark:bg-ink sm:px-6">
+
+        <button id="openSidebar" aria-label="Abrir menu"
+          class="rounded-lg border border-icy p-2 transition hover:bg-icy/40 focus:outline-none focus:ring-2 focus:ring-icy active:scale-95 dark:border-iron dark:hover:bg-iron lg:hidden">
+         
+        </button>
+
+        <h1 class="hidden text-lg font-semibold sm:block">Dashboard</h1>
+
+        <div class="ml-auto flex items-center gap-3">
+
+         
+  </div>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
